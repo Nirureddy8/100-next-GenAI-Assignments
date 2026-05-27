@@ -1,0 +1,1155 @@
+[
+  {
+    "ticket_id": "TKT-1001",
+    "channel": "app",
+    "store_id": "STORE-101",
+    "customer_id": "CUST-501",
+    "customer_name": "",
+    "issue_description": "The POS terminal at checkout counter 3 froze during a customer transaction and we cannot complete billing",
+    "timestamp": "2026-05-25T08:34:59.971618",
+    "category": "pos_failure",
+    "confidence_score": 0.91,
+    "severity": "medium",
+    "severity_reason": "The issue affects a single POS terminal, causing a partial disruption with limited business impact at one checkout counter.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 30,
+      "severity_latency_ms": 3482.26
+    }
+  },
+  {
+    "ticket_id": "TKT-1004",
+    "channel": "app",
+    "store_id": "STORE-101",
+    "customer_id": "CUST-504",
+    "customer_name": "",
+    "issue_description": "Inventory sync is delayed and stock levels in the system do not match actual store inventory",
+    "timestamp": "2026-05-25T08:36:21.981203",
+    "category": "inventory_sync_failure",
+    "confidence_score": 0.87,
+    "severity": "high",
+    "severity_reason": "Inventory sync delay is causing a partial disruption with limited business impact, affecting a single store location (STORE-101).",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": false,
+    "approver_notes": "need verification",
+    "final_status": "rejected",
+    "error_log": [],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 30,
+      "severity_latency_ms": 1380.92
+    }
+  },
+  {
+    "ticket_id": "TKT-2002",
+    "channel": "app",
+    "store_id": "STORE-202",
+    "customer_id": "CUST-602",
+    "customer_name": "Priya Menon",
+    "issue_description": "Fraud suspected due to repeated voided transactions and suspicious payment activity",
+    "timestamp": "2026-05-25T09:01:16.535587",
+    "category": "payment_gateway_failure",
+    "confidence_score": 0.93,
+    "severity": "critical",
+    "severity_reason": "Fraud suspected with repeated voided transactions and suspicious payment activity, posing a significant security risk and potential revenue loss.",
+    "escalate": true,
+    "retrieved_docs": [
+      {
+        "doc_id": "sop_fraud_alert_chunk_75",
+        "content": "for high-risk items. * Multiple payment attempts with different cards for the same order or customer account. * Use of international IP addresses with domestic shipping addresses (or vice-versa). * Frequent use of gift cards, particularly for high-value orders or when combined with other suspicious indicators. * Declined transactions followed by a successful one with a different card. * **Shipping & Fulfillment Anomalies:** * Shipping to freight forwarders, P.O. boxes, or vacant properties. * Requests for expedited shipping on first-time, high-value orders. * Changes to shipping address post-purchase without adequate verification. **2.2 Identity & Account-Based Fraud** These alerts often involve unauthorized access or impersonation: * **Account Takeover (ATO):** * Unauthorized changes to customer account details (e.g., email, password, shipping address). * Orders placed from a customer account with a new shipping address or payment method. * Suspicious login attempts from unusual geographic locations or devices. * **Stolen Credit Card/Debit Card Usage:** * Transactions flagged by payment processors or banks as potentially fraudulent. * High decline rates for specific card numbers or card ranges. * **\"Friendly Fraud\" (Chargeback Abuse):** * Customers claiming non-receipt of goods or services when they actually received them. * Customers claiming goods were \"not as described\" to",
+        "score": 0.6379
+      },
+      {
+        "doc_id": "sop_fraud_alert_chunk_82",
+        "content": "cancel the order in the OMS. If funds were captured, process a full refund. * **In-Store (Post-transaction discovery):** If merchandise has left the store, initiate an internal LP investigation. If the transaction is still active, void it. * **In-Store (Pre-transaction identification):** Politely decline the transaction, stating \"We are unable to complete this transaction at this time. Please try another payment method or contact your card issuer.\" Do not accuse. * **System Update:** * Permanently flag the associated customer account, email address, IP address, shipping address, and payment method in the FDS/OMS/CRM as fraudulent. Add to internal blacklists. * Log all details of the fraudulent activity. * **Customer Notification (Online):** Send a generic cancellation email stating the order was cancelled due to \"security concerns\" or \"unverifiable details\" without disclosing specific fraud accusations. * **Escalation:** Refer to Section 4. If high value or part of a larger scheme, escalate to Loss Prevention and potentially law enforcement. 3. **If Unverifiable / No Customer Contact / Insufficient Information:** * **Action:** Default to cancelling the order if the risk score remains high. A high-risk order with no successful customer contact poses an unacceptable chargeback risk. * **Hold Period (Optional, for medium-risk only):** For borderline cases,",
+        "score": 0.6174
+      },
+      {
+        "doc_id": "sop_fraud_alert_chunk_78",
+        "content": "card swipes, unusual item selection for a given customer profile). The associate must immediately inform their Store Manager/Supervisor. * **Customer Service Inquiries:** Customers report unauthorized transactions on their accounts or express concern about suspicious communications. These are logged in the Customer Relationship Management (CRM) system and escalated to the appropriate fraud handling team. * **Loss Prevention Monitoring:** LP personnel identify suspicious patterns via CCTV, data analysis, or internal reporting. **3.2 Initial Assessment & Data Gathering** 1. **Retrieve Alert Details:** Access the alert within the relevant system (FDS, OMS, POS, CRM). 2. **Review Transaction Information:** * **Order Details (Online):** Transaction ID, Order Value, Item SKUs and Quantities, Shipping Address, Billing Address, IP Address, Email Address, Phone Number, Payment Method used (last 4 digits of card, payment gateway token), Shipping Method (e.g., Standard, Expedited, BOPIS). * **Transaction Details (In-Store):** Transaction ID, Items purchased, Payment Method, Time and Date, Associate ID, CCTV footage (if available and relevant). 3. **Cross-Reference Customer Profile:** * Search the CRM/OMS for the customer's purchase history, loyalty program status, previous interactions, and any existing fraud flags or notes. * Check for multiple accounts associated with the same address, phone number, or email. * Verify the customer's current contact information.",
+        "score": 0.6171
+      }
+    ],
+    "suggested_resolution": "Void any active suspicious transactions. Permanently flag and blacklist the associated customer account, email, IP, shipping address, and payment methods in FDS/OMS/CRM. Log all details of the fraudulent activity and immediately escalate to Loss Prevention for further investigation due to the critical nature and repeated attempts.",
+    "resolution_source": "rag_doc",
+    "human_approved": "pending",
+    "approver_notes": "Awaiting human approval",
+    "final_status": "pending_review",
+    "error_log": [],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 55,
+      "severity_latency_ms": 2443.45
+    }
+  },
+  {
+    "ticket_id": "DEL-TKT0000",
+    "timestamp": "2026-05-25T10:48:47.001111",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST9752",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2067.72
+    }
+  },
+  {
+    "ticket_id": "BEN-TKT0001",
+    "timestamp": "2026-05-25T10:48:47.001139",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST7479",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2207.99
+    }
+  },
+  {
+    "ticket_id": "PUN-TKT0002",
+    "timestamp": "2026-05-25T10:48:47.001157",
+    "channel": "Email",
+    "store_id": "",
+    "customer_id": "CUST3992",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided in the ticket to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1789.12
+    }
+  },
+  {
+    "ticket_id": "PUN-TKT0003",
+    "timestamp": "2026-05-25T10:48:47.001172",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST7933",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided in the ticket to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1829.66
+    }
+  },
+  {
+    "ticket_id": "DEL-TKT0004",
+    "timestamp": "2026-05-25T10:48:47.001187",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST5136",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2293.13
+    }
+  },
+  {
+    "ticket_id": "CHE-TKT0005",
+    "timestamp": "2026-05-25T10:48:47.001201",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST8390",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "The issue description and operational impact details are missing, and there is no indication of revenue loss, customer impact, or security risk.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2032.82
+    }
+  },
+  {
+    "ticket_id": "DEL-TKT0006",
+    "timestamp": "2026-05-25T10:48:47.001215",
+    "channel": "Phone",
+    "store_id": "",
+    "customer_id": "CUST6448",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2373.15
+    }
+  },
+  {
+    "ticket_id": "BEN-TKT0007",
+    "timestamp": "2026-05-25T10:48:47.001229",
+    "channel": "Email",
+    "store_id": "",
+    "customer_id": "CUST7541",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided in the ticket to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1856.69
+    }
+  },
+  {
+    "ticket_id": "PUN-TKT0008",
+    "timestamp": "2026-05-25T10:48:47.001243",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST3014",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2329.63
+    }
+  },
+  {
+    "ticket_id": "BEN-TKT0009",
+    "timestamp": "2026-05-25T10:48:47.001257",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST4845",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1646.43
+    }
+  },
+  {
+    "ticket_id": "MUM-TKT0010",
+    "timestamp": "",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST2265",
+    "customer_name": "",
+    "issue_description": "The weekly sales performance report for Region East is missing data entirely for Store 022 and Store 025. Data gap needs urgent attention for leadership review.",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "high",
+    "severity_reason": "The missing sales data for two stores impacts leadership review and decision-making, representing a major operational disruption for the region.",
+    "escalate": false,
+    "retrieved_docs": [
+      {
+        "doc_id": "sop_order_delay_chunk_105",
+        "content": "Detailed summary of the situation, including order number(s), customer contact history, root cause analysis. * Attempts made for resolution and outcomes. * Reason for escalation and desired outcome. * Specific policy/guideline references where applicable. * Attach relevant communication logs and internal notes. --- ### SECTION 5 — PREVENTION TIPS Proactive measures are critical to minimizing order delays and enhancing overall customer satisfaction. **5.1 Proactive Inventory Management:** * **Real-time Inventory Accuracy:** Implement and enforce rigorous cycle counting and periodic physical inventory audits across all FCs and stores to ensure WMS/SIS data matches physical stock. * **Safety Stock Levels:** Establish appropriate safety stock levels for high-demand or critical SKUs to buffer against unexpected demand surges or supply chain disruptions. * **Forecast Accuracy:** Improve demand forecasting models by integrating historical sales data, promotional calendars, and market trends to prevent stock-outs. * **Automated Replenishment:** Utilize automated inventory replenishment systems to trigger reorders when stock falls below predefined thresholds. **5.2 Robust System Integrations & Monitoring:** * **Seamless Data Flow:** Ensure robust, real-time integration between OMS, WMS, CRM, and shipping carrier systems to prevent data latency or discrepancies. * **Proactive Monitoring:** Implement dashboards and alert systems to monitor system health, API performance, and transaction queues. Set",
+        "score": 0.6276
+      },
+      {
+        "doc_id": "order_delay_sop_chunk_22",
+        "content": "thoroughly documented in the case notes. * **Handover:** Provide a concise summary of the issue, root cause (if known), actions taken, and the current state, along with any proposed solutions or customer sentiment. * **Tracking:** Ensure the escalated case is tracked and monitored by the receiving tier. **Outcome:** Timely attention to critical issues, efficient allocation of resources, and a structured approach to problem resolution at appropriate levels of authority. --- ## 7. SLA Requirements (Service Level Agreements) Adhering to defined SLAs is crucial for managing customer expectations and ensuring operational accountability. Both internal and external SLAs must be considered. **Objective:** To establish clear timeframes for acknowledging, investigating, and resolving order delays, and to understand external carrier performance commitments. **Procedure:** 1. **Internal SLAs (Customer-Facing):** * **Initial Acknowledgment:** * **Goal:** Inform the customer that their inquiry has been received. * **Target:** Within [e.g., 2 hours / 1 business day] of receiving the delay inquiry. * **Status Update / Initial Finding:** * **Goal:** Provide the customer with the initial finding from shipment validation or logistics coordination. [PAGE 8] * **Target:** Within [e.g., 24 hours / 2 business days] of initial acknowledgment. * **Root Cause Identified & Resolution Proposed:** * **Goal:** Inform the customer",
+        "score": 0.6154
+      },
+      {
+        "doc_id": "sop_order_delay_chunk_99",
+        "content": "for Resolution** Engage relevant internal teams based on the root cause: [PAGE 6] 1. **Inventory Issues:** Create a ticket for the Inventory Management team using the \"Inventory Query\" template in Jira Service Desk, detailing the order number, SKU, and discrepancy. Request urgent stock verification or transfer. 2. **Fulfillment Center Delays:** Ping the Fulfillment Lead via Microsoft Teams or raise an urgent ticket in the WMS system, providing order details and the nature of the delay (e.g., \"urgent pick required,\" \"packing error\"). 3. **Shipping Carrier Issues:** Forward details to the Logistics Coordinator responsible for carrier liaison. For lost packages, initiate a carrier trace request (refer to **[SOP-LOG-005: Carrier Trace Request Protocol]**). 4. **System Glitches:** Escalate to the E-commerce Operations team or IT Support via the designated \"System Incident\" channel/tool. 5. **Payment/Fraud Holds:** Coordinate with the Finance/Risk Management team. **3.7 Step 7: Propose Resolution and Detailed Customer Communication** Once a resolution or clear next steps are identified: 1. **Provide a New Estimated Delivery Date (NEDD):** Communicate the most accurate NEDD based on internal coordination. 2. **Explain the Cause (Simply):** Briefly explain the reason for the delay without over-sharing internal complexities. E.g., \"There was an unexpected stock replenishment delay,\" or \"Our shipping partner",
+        "score": 0.6145
+      }
+    ],
+    "suggested_resolution": "**Resolution:**\nThe missing sales data for Store 022 and Store 025 in the Region East weekly report suggests a potential system glitch or data integration issue.\n\n**Escalation Needed:**\nImmediately escalate this issue to the **E-commerce Operations team or IT Support** via the designated \"System Incident\" channel/tool, as outlined in the SOP for **\"System Glitches.\"**\n\n**Desired Outcome:**\nPrompt investigation to identify the root cause of the data gap, retrieve the missing sales data for Store 022 and Store 025, and ensure the weekly report is accurately updated for leadership review. Recommend reviewing **\"Robust System Integrations & Monitoring\"** (SOP Section 5.2) to prevent similar data discrepancies in the future.",
+    "resolution_source": "rag_doc",
+    "human_approved": "pending",
+    "approver_notes": "Awaiting human approval",
+    "final_status": "pending_review",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 3524.78
+    }
+  },
+  {
+    "ticket_id": "PUN-TKT0011",
+    "timestamp": "2026-05-25T10:48:47.001285",
+    "channel": "Phone",
+    "store_id": "",
+    "customer_id": "CUST9058",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2449.24
+    }
+  },
+  {
+    "ticket_id": "DEL-TKT0012",
+    "timestamp": "2026-05-25T10:48:47.001299",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST3553",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1813.33
+    }
+  },
+  {
+    "ticket_id": "DEL-TKT0013",
+    "timestamp": "2026-05-25T10:48:47.001312",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST8795",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2054.21
+    }
+  },
+  {
+    "ticket_id": "DEL-TKT0014",
+    "timestamp": "2026-05-25T10:48:47.001326",
+    "channel": "Email",
+    "store_id": "",
+    "customer_id": "CUST6330",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided in the ticket to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2303.39
+    }
+  },
+  {
+    "ticket_id": "CHE-TKT0015",
+    "timestamp": "2026-05-25T10:48:47.001340",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST9877",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2282.67
+    }
+  },
+  {
+    "ticket_id": "BEN-TKT0016",
+    "timestamp": "2026-05-25T10:48:47.001354",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST9456",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1938.75
+    }
+  },
+  {
+    "ticket_id": "CHE-TKT0017",
+    "timestamp": "2026-05-25T10:48:47.001368",
+    "channel": "Phone",
+    "store_id": "",
+    "customer_id": "CUST2041",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2377.06
+    }
+  },
+  {
+    "ticket_id": "MUM-TKT0018",
+    "timestamp": "2026-05-25T10:48:47.001382",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST5457",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2414.17
+    }
+  },
+  {
+    "ticket_id": "BEN-TKT0019",
+    "timestamp": "2026-05-25T10:48:47.001395",
+    "channel": "Phone",
+    "store_id": "",
+    "customer_id": "CUST5222",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2249.48
+    }
+  },
+  {
+    "ticket_id": "PUN-TKT0020",
+    "timestamp": "2026-05-25T10:48:47.001409",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST9310",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2559.27
+    }
+  },
+  {
+    "ticket_id": "MUM-TKT0021",
+    "timestamp": "2026-05-25T10:48:47.001422",
+    "channel": "Phone",
+    "store_id": "",
+    "customer_id": "CUST3179",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2072.46
+    }
+  },
+  {
+    "ticket_id": "CHE-TKT0022",
+    "timestamp": "2026-05-25T10:48:47.001436",
+    "channel": "Mobile App",
+    "store_id": "",
+    "customer_id": "CUST5933",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 1596.47
+    }
+  },
+  {
+    "ticket_id": "MUM-TKT0023",
+    "timestamp": "2026-05-25T10:48:47.001449",
+    "channel": "Email",
+    "store_id": "",
+    "customer_id": "CUST8831",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "The ticket lacks sufficient details to assess operational, revenue, or customer impact, and no immediate business impact is evident.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2207.41
+    }
+  },
+  {
+    "ticket_id": "MUM-TKT0024",
+    "timestamp": "2026-05-25T10:48:47.001463",
+    "channel": "Chat",
+    "store_id": "",
+    "customer_id": "CUST9936",
+    "customer_name": "",
+    "issue_description": "",
+    "category": "unclassified",
+    "confidence_score": 0.5,
+    "priority": null,
+    "sentiment": null,
+    "summary": null,
+    "customer_context": "Standard Tier. No priority profile found.",
+    "severity": "low",
+    "severity_reason": "Insufficient details provided to assess operational, revenue, or customer impact.",
+    "escalate": false,
+    "retrieved_docs": [],
+    "suggested_resolution": "Restart the affected system and verify network/device connectivity. If the issue persists, escalate to human support.",
+    "resolution_source": "llm_generated",
+    "human_approved": true,
+    "approver_notes": "Auto-approved by policy",
+    "final_status": "resolved",
+    "error_log": [
+      {
+        "agent": "classifier",
+        "error": "LLM Node Breakdown: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      }
+    ],
+    "retry_count": 0,
+    "_sla_breach": "No",
+    "_priority": "Medium",
+    "_customer_tier": "Silver",
+    "_requires_escalation": "No",
+    "_system_status": "Operational",
+    "metadata": {
+      "severity_model": "azure/gpt-4o",
+      "risk_score": 15,
+      "severity_latency_ms": 2228.35
+    }
+  }
+]
